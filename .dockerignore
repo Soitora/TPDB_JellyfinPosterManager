@@ -1,0 +1,13 @@
+.git
+.github
+.env
+config.py
+__pycache__/
+*.py[cod]
+.pytest_cache/
+cache/
+data/
+logs/
+temp_posters/
+tests/
+docs/
