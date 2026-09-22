@@ -113,25 +113,49 @@ Visit `http://localhost:5001` in your web browser, or use your configured `WEB_P
 
 ### Docker
 
-Docker includes Chromium and ChromeDriver for the TPDb browser workflow. Copy the example environment file, add your credentials, then start the service:
+The published container includes Chromium and ChromeDriver for the TPDb browser workflow. To run it with Docker Compose, download or clone this repository, copy the configuration example, add your credentials, then start it:
 
 ```bash
 cp .env.example .env
-docker compose up -d --build
+docker compose pull
+docker compose up -d
 ```
 
 Open `http://localhost:5001`. The Compose file intentionally publishes only to `127.0.0.1`, because this application is single-user and has no authentication. Do not change this to a public address unless an authenticated reverse proxy protects it.
 
-The `poster-manager-data`, `poster-manager-cache`, and `poster-manager-logs` volumes preserve state across image upgrades. To inspect logs or stop the service:
+The `poster-manager-data`, `poster-manager-cache`, and `poster-manager-logs` volumes preserve state across updates. To inspect logs, update, or stop the service:
 
 ```bash
 docker compose logs -f
+docker compose pull && docker compose up -d
 docker compose down
 ```
 
 When Jellyfin runs on the Docker host, `localhost` inside the container is not the host. On Docker Desktop, set `JELLYFIN_URL` to `http://host.docker.internal:8096` (adjust the port if needed). On Linux, use an address reachable from the container, such as the host's LAN address.
 
-The supplied `.env.example` lists every Docker-configurable application setting, including safe defaults for optional tuning. Docker uses the variables in `.env`; local Python usage can continue to use `config.py` as before.
+The supplied `.env.example` lists the settings you can customize. Set `IMAGE_TAG` to a numbered release rather than `latest` if you prefer controlled updates. Docker uses the variables in `.env`; local Python usage can continue to use `config.py` as before.
+
+### Unraid
+
+In Unraid, open **Docker → Add Container** and use the following settings:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `ghcr.io/soitora/tpdb-jellyfin-poster-manager:latest` |
+| Network type | `bridge` |
+| Port | Host `5001` → Container `5001` |
+
+Add these persistent path mappings:
+
+| Host path | Container path |
+| --- | --- |
+| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/data` | `/app/data` |
+| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/cache` | `/app/cache` |
+| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/logs` | `/app/logs` |
+
+Add the required credentials and optional settings from `.env.example` as environment variables in the Unraid form. For predictable updates, select a numbered image tag instead of `latest` when one is available.
+
+If Jellyfin runs on Unraid, set `JELLYFIN_URL` to its Unraid LAN address or its hostname on a shared custom Docker network. Do not use `localhost`. This web application has no sign-in screen, so keep it on a trusted LAN and do not expose its port to the internet.
 
 ### Upgrading an existing installation
 

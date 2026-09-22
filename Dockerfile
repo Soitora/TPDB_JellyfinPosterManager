@@ -3,7 +3,9 @@ FROM python:3.12-slim-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    CHROME_BINARY=/usr/bin/chromium
+    CHROME_BINARY=/usr/bin/chromium \
+    WEB_HOST=0.0.0.0 \
+    WEB_PORT=5001
 
 WORKDIR /app
 
