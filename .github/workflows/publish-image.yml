@@ -2,10 +2,10 @@ name: Publish container image
 
 on:
   push:
-    branches: [docker]
+    branches: [main]
     tags: ['v*']
   pull_request:
-    branches: [docker]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
