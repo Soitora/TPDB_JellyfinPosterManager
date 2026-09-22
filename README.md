@@ -141,7 +141,7 @@ In Unraid, open **Docker → Add Container** and use the following settings:
 
 | Setting | Value |
 | --- | --- |
-| Repository | `ghcr.io/soitora/tpdb-jellyfin-poster-manager:latest` |
+| Repository | `ghcr.io/thecommishdeuce/jellyfin-poster-manager:latest` |
 | Network type | `bridge` |
 | Port | Host `5001` → Container `5001` |
 
@@ -149,9 +149,9 @@ Add these persistent path mappings:
 
 | Host path | Container path |
 | --- | --- |
-| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/data` | `/app/data` |
-| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/cache` | `/app/cache` |
-| `/mnt/user/appdata/tpdb-jellyfin-poster-manager/logs` | `/app/logs` |
+| `/mnt/user/appdata/jellyfin-poster-manager/data` | `/app/data` |
+| `/mnt/user/appdata/jellyfin-poster-manager/cache` | `/app/cache` |
+| `/mnt/user/appdata/jellyfin-poster-manager/logs` | `/app/logs` |
 
 Add the required credentials and optional settings from `.env.example` as environment variables in the Unraid form. For predictable updates, select a numbered image tag instead of `latest` when one is available.
 

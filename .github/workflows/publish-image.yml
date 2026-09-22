@@ -26,7 +26,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/${{ github.repository_owner }}/tpdb-jellyfin-poster-manager
+          images: ghcr.io/${{ github.repository_owner }}/jellyfin-poster-manager
           tags: |
             type=ref,event=branch
             type=ref,event=pr

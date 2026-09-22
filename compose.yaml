@@ -1,6 +1,6 @@
 services:
   poster-manager:
-    image: ghcr.io/soitora/tpdb-jellyfin-poster-manager:${IMAGE_TAG:-latest}
+    image: ghcr.io/thecommishdeuce/jellyfin-poster-manager:${IMAGE_TAG:-latest}
     ports:
       # This application has no authentication; keep it accessible only from this host.
       - "127.0.0.1:${WEB_PORT:-5001}:${WEB_PORT:-5001}"
