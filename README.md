@@ -155,6 +155,8 @@ Add these persistent path mappings:
 
 Add the required credentials and optional settings from `.env.example` as environment variables in the Unraid form. For predictable updates, select a numbered image tag instead of `latest` when one is available.
 
+The image runs as Unraid's standard `nobody:users` account (`99:100`), so the default appdata folder permissions work without extra changes. If you use custom ownership for the host folders, grant that account write access to all three mapped folders.
+
 If Jellyfin runs on Unraid, set `JELLYFIN_URL` to its Unraid LAN address or its hostname on a shared custom Docker network. Do not use `localhost`. This web application has no sign-in screen, so keep it on a trusted LAN and do not expose its port to the internet.
 
 ### Upgrading an existing installation

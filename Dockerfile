@@ -4,6 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     CHROME_BINARY=/usr/bin/chromium \
+    HOME=/home/appuser \
     WEB_HOST=0.0.0.0 \
     WEB_PORT=5001
 
@@ -17,11 +18,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN mkdir -p /app/data /app/cache /app/logs \
-    && useradd --create-home --uid 10001 appuser \
-    && chown -R appuser:appuser /app
+RUN mkdir -p /app/data /app/cache /app/logs /home/appuser \
+    && chown -R 99:100 /app /home/appuser
 
-USER appuser
+# Unraid creates appdata folders as nobody:users (99:100).
+USER 99:100
 
 EXPOSE 5001
 
